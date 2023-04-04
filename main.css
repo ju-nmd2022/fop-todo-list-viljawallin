@@ -35,5 +35,23 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-weight: bold;
-  text-decoration-style: dotted;
+  text-indent: 10px;
+}
+
+.inputField {
+  border: 2px solid rgb(250, 63, 172);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.addButton {
+  border: 2px solid rgb(250, 63, 172);
+  color: rgb(250, 63, 172);
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }

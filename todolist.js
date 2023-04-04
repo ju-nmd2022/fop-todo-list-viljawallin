@@ -1,5 +1,7 @@
 const inputField = document.getElementById("inputField");
+inputField.className = "inputField";
 const addButton = document.querySelector("#addButton");
+addButton.className = "addButton";
 const title = document.getElementById("title");
 
 addButton.addEventListener("click", () => {
@@ -17,7 +19,8 @@ addButton.addEventListener("click", () => {
 
     // Loop through the array, and also creating a <li> element for each thing to "to do..." //
     items.forEach((item) => {
-      const list = document.createElement("span");
+      const list = document.createElement("div");
+      list.style.listStyle = "disc";
       const text = document.createTextNode(item);
       list.appendChild(text);
 
@@ -35,14 +38,13 @@ addButton.addEventListener("click", () => {
         activities.removeChild(list);
       };
 
-      // Append the buttons to the <li> element
       list.appendChild(doneButton);
       list.appendChild(deleteButton);
 
       activities.appendChild(list);
     });
 
-    // Append the <ul> element to the DOM
+    // Append the <div> element to the DOM
     document.body.appendChild(activities);
     document.getElementById("inputField").value = "";
   }
