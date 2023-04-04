@@ -10,6 +10,7 @@ addButton.addEventListener("click", () => {
   } else {
     // Here I am creating the <div> element for the inputText //
     const activities = document.createElement("div");
+    activities.id = "list";
 
     // Here I am creating an array of text to use for the <span> elements //
     const items = [inputText];
@@ -22,12 +23,14 @@ addButton.addEventListener("click", () => {
 
       const doneButton = document.createElement("button");
       doneButton.innerText = "Done";
+      doneButton.className = "doneButton";
       doneButton.onclick = () => {
         list.style.textDecoration = "line-through";
       };
 
       const deleteButton = document.createElement("button");
       deleteButton.innerText = "Delete";
+      deleteButton.className = "deleteButton";
       deleteButton.onclick = () => {
         activities.removeChild(list);
       };
