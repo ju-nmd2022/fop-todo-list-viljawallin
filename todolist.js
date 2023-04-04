@@ -14,13 +14,12 @@ addButton.addEventListener("click", () => {
     const activities = document.createElement("div");
     activities.id = "list";
 
-    // Here I am creating an array of text to use for the <span> elements //
+    // Here I am creating an array of text to use for the <div> elements //
     const items = [inputText];
 
-    // Loop through the array, and also creating a <li> element for each thing to "to do..." //
+    // Loop through the array
     items.forEach((item) => {
       const list = document.createElement("div");
-      list.style.listStyle = "disc";
       const text = document.createTextNode(item);
       list.appendChild(text);
 
@@ -44,7 +43,7 @@ addButton.addEventListener("click", () => {
       activities.appendChild(list);
     });
 
-    // Append the <div> element to the DOM
+    // Append the <div> element to the DOM //
     document.body.appendChild(activities);
     document.getElementById("inputField").value = "";
   }
