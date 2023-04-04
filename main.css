@@ -1,7 +1,15 @@
 .title {
-  font-size: 30pt;
+  font-size: 32pt;
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #d1a7ff;
   text-align: center;
   background-color: antiquewhite;
+}
+
+body {
+  background-color: #dfc5fa;
+}
+
+#inputField {
+  grid-area: auto;
 }
