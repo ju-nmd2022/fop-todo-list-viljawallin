@@ -27,7 +27,7 @@ function createTaskElement(task) {
   deleteButton.innerText = "Delete";
   deleteButton.className = "deleteButton";
   deleteButton.onclick = () => {
-    // Took information from hamstergram by Garrit "post.likes.splice(userIndex, 1);" in order to remove one specific task from the task array //
+    // Took this information from hamstergram-workshop-login by Garrit "post.likes.splice(userIndex, 1);" in order to remove one specific task from the task array //
     tasks.splice(tasks.indexOf(task), 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     tasksContainer.removeChild(list);
@@ -45,6 +45,7 @@ function createTaskElement(task) {
 }
 
 // Function to display the list of tasks - it loops throgh the tasks array and adds each task as new HTML element to the createTaskElement function. //
+// I took information from hamstergram-workshop-login by Garrit - from the function displayPosts - order to make my function displayTasks. The same code but changed it to my variebles and the way I wanted my function to work.//
 function displayTasks() {
   for (let task of tasks) {
     const list = createTaskElement(task);
