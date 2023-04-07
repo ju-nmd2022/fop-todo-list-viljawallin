@@ -1,3 +1,4 @@
+// Reference to the element in the HTML//
 const inputField = document.getElementById("inputField");
 inputField.className = "inputField";
 const addButton = document.querySelector("#addButton");
@@ -7,7 +8,7 @@ const title = document.getElementById("title");
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-// Function to create a new task element //
+// Function to create a new task element. It creates a new div element and adds the task-text to it. Also a "done" and "delete" button. If the task is marked as completed it's in the completedTasks array - and adds a line-through style to the text. //
 function createTaskElement(task) {
   const list = document.createElement("div");
   const text = document.createTextNode(task);
@@ -26,6 +27,7 @@ function createTaskElement(task) {
   deleteButton.innerText = "Delete";
   deleteButton.className = "deleteButton";
   deleteButton.onclick = () => {
+    // Took information from hamstergram by Garrit "post.likes.splice(userIndex, 1);" in order to remove one specific task from the task array //
     tasks.splice(tasks.indexOf(task), 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     tasksContainer.removeChild(list);
@@ -42,7 +44,7 @@ function createTaskElement(task) {
   return list;
 }
 
-// Function to display the list of tasks //
+// Function to display the list of tasks - it loops throgh the tasks array and adds each task as new HTML element to the createTaskElement function. //
 function displayTasks() {
   for (let task of tasks) {
     const list = createTaskElement(task);
@@ -50,13 +52,15 @@ function displayTasks() {
   }
 }
 
-// Here I am making the existing tasks to display when the page loads //
+// creates new div element to display //
 const tasksContainer = document.createElement("div");
 tasksContainer.id = "tasksContainer";
 displayTasks();
 document.body.appendChild(tasksContainer);
 
+// When button is clicked - this checks if the input field is empty. If it is not, it adds the input text to the tasks array. Also saving it to the local storage //
 addButton.addEventListener("click", () => {
+  // I took inspiration from https://www.w3schools.com/howto/howto_js_todolist.asp solution when it came to making a new list when clicking the add button in javascript //
   const inputText = document.getElementById("inputField").value;
 
   if (inputText == "") {
@@ -67,7 +71,6 @@ addButton.addEventListener("click", () => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     // Creating and appending the new task element //
-
     const list = createTaskElement(inputText);
     tasksContainer.appendChild(list);
 
