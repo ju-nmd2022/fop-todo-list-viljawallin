@@ -5,6 +5,7 @@ addButton.className = "addButton";
 const title = document.getElementById("title");
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
 // Function to create a new task element //
 function createTaskElement(task) {
@@ -17,6 +18,8 @@ function createTaskElement(task) {
   doneButton.className = "doneButton";
   doneButton.onclick = () => {
     list.style.textDecoration = "line-through";
+    completedTasks.push(task);
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
   };
 
   const deleteButton = document.createElement("button");
@@ -30,6 +33,11 @@ function createTaskElement(task) {
 
   list.appendChild(doneButton);
   list.appendChild(deleteButton);
+
+  // I also want to check if the task is completed in order to apply my line-through decoration //
+  if (completedTasks.includes(task)) {
+    list.style.textDecoration = "line-through";
+  }
 
   return list;
 }
