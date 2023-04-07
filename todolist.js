@@ -4,47 +4,66 @@ const addButton = document.querySelector("#addButton");
 addButton.className = "addButton";
 const title = document.getElementById("title");
 
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+// Function to create a new task element //
+function createTaskElement(task) {
+  const list = document.createElement("div");
+  const text = document.createTextNode(task);
+  list.appendChild(text);
+
+  const doneButton = document.createElement("button");
+  doneButton.innerText = "Done";
+  doneButton.className = "doneButton";
+  doneButton.onclick = () => {
+    list.style.textDecoration = "line-through";
+  };
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.className = "deleteButton";
+  deleteButton.onclick = () => {
+    tasks.splice(tasks.indexOf(task), 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    tasksContainer.removeChild(list);
+  };
+
+  list.appendChild(doneButton);
+  list.appendChild(deleteButton);
+
+  return list;
+}
+
+// Function to display the list of tasks //
+function displayTasks() {
+  for (let task of tasks) {
+    const list = createTaskElement(task);
+    tasksContainer.appendChild(list);
+  }
+}
+
+// Here I am making the existing tasks to display when the page loads //
+const tasksContainer = document.createElement("div");
+tasksContainer.id = "tasksContainer";
+displayTasks();
+document.body.appendChild(tasksContainer);
+
 addButton.addEventListener("click", () => {
   const inputText = document.getElementById("inputField").value;
 
   if (inputText == "") {
     return;
   } else {
-    // Here I am creating the <div> element for the inputText //
-    const activities = document.createElement("div");
-    activities.id = "list";
+    // Adding a new task to the list //
+    tasks.push(inputText);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    // Here I am creating an array of text to use for the <div> elements //
-    const items = [inputText];
+    // Creating and appending the new task element //
 
-    // Loop through the array
-    items.forEach((item) => {
-      const list = document.createElement("div");
-      const text = document.createTextNode(item);
-      list.appendChild(text);
+    const list = createTaskElement(inputText);
+    tasksContainer.appendChild(list);
 
-      const doneButton = document.createElement("button");
-      doneButton.innerText = "Done";
-      doneButton.className = "doneButton";
-      doneButton.onclick = () => {
-        list.style.textDecoration = "line-through";
-      };
-
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "Delete";
-      deleteButton.className = "deleteButton";
-      deleteButton.onclick = () => {
-        activities.removeChild(list);
-      };
-
-      list.appendChild(doneButton);
-      list.appendChild(deleteButton);
-
-      activities.appendChild(list);
-    });
-
-    // Append the <div> element to the DOM //
-    document.body.appendChild(activities);
+    // Clearing the input field! //
     document.getElementById("inputField").value = "";
   }
 });
